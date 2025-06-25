@@ -1,7 +1,10 @@
 # Chat-with-your-Data-using-AI-Agent
 An advanced, conversational AI-powered API that translates natural language questions into precise SQL queries, interacts with a database, and provides human-readable answers. This project goes beyond basic NL-to-SQL by implementing a multi-step, self-correcting workflow for higher accuracy and a better user experience.
 
-# Workflow
+## 📈 Project Workflow
+
+This project uses a sophisticated, multi-agent chain of thought to process a user's request. This ensures a high degree of accuracy and robustness.
+
 ![image](https://github.com/user-attachments/assets/7b4272a6-e752-4249-ac8e-e947ecbf3634)
 
 ## ✨ Key Features
@@ -13,27 +16,6 @@ An advanced, conversational AI-powered API that translates natural language ques
 - 🚀 **Built with Modern Tools**: Leverages the speed of FastAPI, the power of LangChain for LLM orchestration, and Azure OpenAI for state-of-the-art language models.
 - 🔌 **Pluggable & Ready-to-Deploy**: Packaged as a clean FastAPI application, ready to be containerized and deployed.
 
-## 📈 Project Workflow
 
-This project uses a sophisticated, multi-agent chain of thought to process a user's request. This ensures a high degree of accuracy and robustness.
 
-### Architecture Diagram
 
-```mermaid
-graph TD
-    A[User Query via API] --> B{1. Prepare Rewriter Input};
-    B --> C[2. Query Rewriter LLM];
-    C --> D{Rewrite OK?};
-    D -- Yes --> E[3. SQL Generator LLM];
-    D -- No / Greeting --> F[Generate Canned Response];
-    E --> G{Generate SQL OK?};
-    G -- Yes --> H[4. Execute SQL Query on DB];
-    G -- No --> F;
-    H --> I{Results Found?};
-    I -- Yes --> J[5. Response Generator LLM];
-    I -- No --> K[6. Clarification LLM];
-    J --> L[Final Answer];
-    K --> M[Ask Clarification Question];
-    F --> L;
-    M --> L;
-    L --> Z[API Response];
